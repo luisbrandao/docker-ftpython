@@ -22,10 +22,10 @@ jobs:
         docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
     - name: Docker login on techsytes
       env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        TECHSYTES_USER: ${{secrets.TECHSYTES_USER}}
+        TECHSYTES_PASSWORD: ${{secrets.TECHSYTES_PASSWORD}}
       run: |
-        docker login registry.techsytes.com -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+        docker login registry.techsytes.com -u ${TECHSYTES_USER} -p ${TECHSYTES_PASSWORD}
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag techmago/docker-ftpython:$(date +%s) --tag techmago/docker-ftpython:latest --tag registry.techsytes.com/docker-ftpython:$(date +%s) --tag registry.techsytes.com/docker-ftpython:latest
     - name: Push the Docker image to DockerHub
