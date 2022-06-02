@@ -9,7 +9,7 @@ RUN yum -y install epel-release && \
                    bind-utils htop file telnet redis ansible git bash-completion-extras \
                    mariadb python36-pip postgresql && \
     yum clean all && rm -rf /var/cache/yum
-RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+RUN curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
     chmod +x kubectl && \
     mv kubectl /usr/local/bin/
 

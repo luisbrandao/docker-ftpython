@@ -14,6 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    steps:
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v3
+      with:
+        token: ${{secrets.github_token}}
     - name: Docker login on DockerHub
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
@@ -27,10 +33,10 @@ jobs:
       run: |
         docker login registry.techsytes.com -u ${TECHSYTES_USER} -p ${TECHSYTES_PASSWORD}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag techmago/docker-ftpython:$(date +%s) --tag techmago/docker-ftpython:latest --tag registry.techsytes.com/docker-ftpython:$(date +%s) --tag registry.techsytes.com/docker-ftpython:latest
+      run: docker build . --file Dockerfile --tag techmago/docker-ftpython:master-${GITHUB_RUN_NUMBER} --tag techmago/docker-ftpython:latest --tag registry.techsytes.com/docker-ftpython:master-${GITHUB_RUN_NUMBER} --tag registry.techsytes.com/docker-ftpython:latest
     - name: Push the Docker image to DockerHub
       run: |
-        docker push techmago/docker-ftpython:$(date +%s)
+        docker push techmago/docker-ftpython:master-${GITHUB_RUN_NUMBER}
         docker push techmago/docker-ftpython:latest
-        docker push registry.techsytes.com/docker-ftpython:$(date +%s)
+        docker push registry.techsytes.com/docker-ftpython:master-${GITHUB_RUN_NUMBER}
         docker push registry.techsytes.com/docker-ftpython:latest
