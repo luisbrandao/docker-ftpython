@@ -1,5 +1,4 @@
 FROM centos:centos7.9.2009
-MAINTAINER Luis Alexandre Deschamps Brandão <techmago@ymail.com>
 
 RUN ln -sf /usr/share/zoneinfo/Brazil/East /etc/localtime
 RUN echo "clean_requirements_on_remove=1" >> /etc/yum.conf && \
@@ -13,10 +12,10 @@ RUN curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/
     chmod +x kubectl && \
     mv kubectl /usr/local/bin/
 
-ADD 90-devops.sh /etc/profile.d/90-devops.sh
+COPY 90-devops.sh /etc/profile.d/90-devops.sh
 
 WORKDIR /app
-ADD ftpython /app/
+COPY ftpython /app/
 
 EXPOSE 8000
-CMD /app/ftpython
+CMD ["/app/ftpython", "8000"]
