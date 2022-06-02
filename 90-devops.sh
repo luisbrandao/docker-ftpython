@@ -6,7 +6,6 @@
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-
 # History control ==================================================================================
 # don't put duplicate lines in the history. See bash(1) for more options
 readonly HISTCONTROL=ignoredups
@@ -51,25 +50,14 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Aliases ========================================================================================
-if [ -x /usr/bin/fortune ]; then
-        echo "Fortune:"
-        fortune
-fi
-
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 alias vi='vim'
 alias tm="tail -f /var/log/messages"
-alias tapache="tail -f /var/log/httpd/*_log"
-alias tnginx="tail -f /var/log/nginx/*.log"
 alias l="ls -laF --color=tty"
-alias halt="echo 'use shutdown -h now!!!' ; shutdown -h now"
-alias tsquid='tail -f /var/log/squid/access.log | perl -pe "s/^\d+\.\d+/localtime $&/e"'
-alias compress='tar -I "pigz --best" -cvf'
+
+alias compress='tar -I "pigz" -cvf'
 alias extract="tar xvzf"
-alias xcompress='tar -I "pxz --best" -cvf'
+alias xcompress='tar -I "pxz" -cvf'
 alias xextract="tar -Jxxvf"
-alias ftpython='echo "Files will be avaliable at $(hostname -I) port 8000" ; ftpython'
-alias pull_stage="hub pull-request -b stage -m"
-alias pull_master="hub pull-request -b master -m"
