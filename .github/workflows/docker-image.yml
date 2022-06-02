@@ -26,7 +26,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag techmago/docker-ftpython:master-${GITHUB_RUN_NUMBER} --tag techmago/docker-ftpython:latest --tag registry.techsytes.com/docker-ftpython:master-${GITHUB_RUN_NUMBER} --tag registry.techsytes.com/docker-ftpython:latest
 
-    - name: Push the Docker image to DockerHub
+    - name: Push the Docker image to DockerHub and Techsytes
       run: |
         docker push techmago/docker-ftpython:master-${GITHUB_RUN_NUMBER}
         docker push techmago/docker-ftpython:latest
