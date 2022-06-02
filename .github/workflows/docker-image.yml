@@ -30,7 +30,7 @@ jobs:
       run: docker build . --file Dockerfile --tag techmago/docker-ftpython:$(date +%s) --tag techmago/docker-ftpython:latest --tag registry.techsytes.com/docker-ftpython:$(date +%s) --tag registry.techsytes.com/docker-ftpython:latest
     - name: Push the Docker image to DockerHub
       run: |
-      docker push techmago/docker-ftpython:$(date +%s)
-      docker push techmago/docker-ftpython:latest
-      docker push registry.techsytes.com/docker-ftpython:$(date +%s)
-      docker push registry.techsytes.com/docker-ftpython:latest
+        docker push techmago/docker-ftpython:$(date +%s)
+        docker push techmago/docker-ftpython:latest
+        docker push registry.techsytes.com/docker-ftpython:$(date +%s)
+        docker push registry.techsytes.com/docker-ftpython:latest
