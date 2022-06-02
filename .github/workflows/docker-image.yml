@@ -14,5 +14,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Docker login on DockerHub
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run:
+        docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+    - name: Docker login on techsytes
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login registry.techsytes.com -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag techmago/docker-ftpython:$(date +%s) --tag techmago/docker-ftpython:latest
+      run: docker build . --file Dockerfile --tag techmago/docker-ftpython:$(date +%s) --tag techmago/docker-ftpython:latest --tag registry.techsytes.com/docker-ftpython:$(date +%s) --tag registry.techsytes.com/docker-ftpython:latest
+    - name: Push the Docker image to DockerHub
+      run: |
+      docker push techmago/docker-ftpython:$(date +%s)
+      docker push techmago/docker-ftpython:latest
+      docker push registry.techsytes.com/docker-ftpython:$(date +%s)
+      docker push registry.techsytes.com/docker-ftpython:latest
