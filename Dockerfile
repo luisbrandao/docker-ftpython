@@ -15,7 +15,7 @@ RUN curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/
 COPY 90-devops.sh /etc/profile.d/90-devops.sh
 
 WORKDIR /app
-COPY ftpython /app/
+COPY ftpython.py /app/
 
 EXPOSE 8000
-CMD ["/app/ftpython", "8000"]
+CMD ["/app/ftpython.py", "8000"]

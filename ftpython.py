@@ -6,12 +6,8 @@ This module builds on BaseHTTPServer by implementing the standard GET
 and HEAD requests in a fairly straightforward manner.
 
 """
-
-
-__version__ = "0.1"
+__version__ = "0.2"
 __all__ = ["SimpleHTTPRequestHandler"]
-__author__ = "bones7456"
-__home_page__ = "http://li2z.cn/"
 
 import os
 import posixpath
@@ -71,9 +67,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             f.write("<strong>Failed:</strong>")
         f.write(info)
         f.write("<br><a href=\"%s\">back</a>" % self.headers['referer'])
-        f.write("<hr><small>Powerd By: bones7456, check new version at ")
-        f.write("<a href=\"http://li2z.cn/?s=SimpleHTTPServerWithUpload\">")
-        f.write("here</a>.</small></body>\n</html>\n")
+        f.write(" here</a>.</small></body>\n</html>\n")
         length = f.tell()
         f.seek(0)
         self.send_response(200)
@@ -83,7 +77,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         if f:
             self.copyfile(f, self.wfile)
             f.close()
-        
+
     def deal_post_data(self):
         boundary = self.headers.plisttext.split("=")[1]
         remainbytes = int(self.headers['content-length'])
@@ -106,7 +100,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             out = open(fn, 'wb')
         except IOError:
             return (False, "Can't create file to write, do you have permission to write?")
-                
+
         preline = self.rfile.readline()
         remainbytes -= len(preline)
         while remainbytes > 0:
@@ -281,8 +275,24 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     extensions_map.update({
         '': 'application/octet-stream', # Default
         '.py': 'text/plain',
+        '.php': 'text/plain',
+        '.js': 'text/plain',
         '.c': 'text/plain',
         '.h': 'text/plain',
+        '.txt': 'text/plain',
+        '.log': 'text/plain',
+        '.sh': 'text/plain',
+        '.xml': 'application/xml',
+        '.json': 'application/json',
+        '.mpeg': 'video/mpeg',
+        '.png': 'image/png',
+        '.pdf': 'application/pdf',
+        '.tar': 'application/x-tar',
+        '.rar': 'application/x-rar-compressed',
+        '.zip': 'application/zip',
+        '.7z': 'application/x-7z-compressed',
+        '.htm': 'text/html',
+        '.html': 'text/html',
         })
 
 
@@ -292,5 +302,3 @@ def test(HandlerClass = SimpleHTTPRequestHandler,
 
 if __name__ == '__main__':
     test()
-
-
