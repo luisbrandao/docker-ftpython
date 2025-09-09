@@ -50,14 +50,26 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Aliases ========================================================================================
+if [ -x /usr/bin/fortune ]; then
+        echo "Fortune:"
+        fortune
+fi
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 alias ll='ls -l'
 alias la='ls -A'
-alias l='ls -CF'
 alias vi='vim'
 alias tm="tail -f /var/log/messages"
 alias l="ls -laF --color=tty"
-
-alias compress='tar -I "pigz" -cvf'
+alias halt="echo 'use shutdown -h now!!!' ; shutdown -h now"
+alias compress='tar -I "pigz --best" -cvf'
 alias extract="tar xvzf"
-alias xcompress='tar -I "pxz" -cvf'
+alias xcompress='tar -I "pxz --best" -cvf'
 alias xextract="tar -Jxxvf"
+alias ftpython='echo "Files will be avaliable at $(hostname -I) port 8000" ; ftpython'
+alias tnginx="tail -f /var/log/nginx/*.log /var/log/nginx/*.err"
+alias rbuild="rpmbuild -ba -D 'debug_package %{nil}'"
+alias b="rpmbuild --rebuild --define 'debug_package %{nil}'"
