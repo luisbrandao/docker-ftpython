@@ -1,5 +1,7 @@
-Docker debug container.
+# Docker debug container.
 
+```bash
 kubectl run ftpython --image registry.hub.docker.com/techmago/docker-ftpython
 kubectl exec -it ftpython bash
 kubectl delete pod ftpython
+```
