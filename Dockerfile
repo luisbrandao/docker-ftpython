@@ -7,7 +7,7 @@ RUN echo "clean_requirements_on_remove=1" >> /etc/yum.conf && \
     RUN dnf -y install epel-release && \
     dnf -y install openssh-clients vim wget byobu net-tools rsync pigz pxz  \
                    bind-utils htop file telnet redis ansible git bash-completion \
-                   mariadb python3.11-pip postgresql iputils && \
+                   mariadb python3.11-pip postgresql iputils jq && \
     dnf clean all && rm -rf /var/cache/yum
 
     RUN curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
